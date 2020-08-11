@@ -12,15 +12,14 @@ public class Lawn {
         this.upperRightCornerPosition = upperRightCornerPosition;
     }
 
-    public Mow findAt(CartesianCoordinates cartesianCoordinates) throws OutOfLawnException {
-        if (!cartesianCoordinates.isIn(this.upperRightCornerPosition)) throw new OutOfLawnException();
-        ;
-        return this.lawnArea.get(cartesianCoordinates);
-    }
-
     public static Lawn generate(CartesianCoordinates upperRightCornerPosition) {
         Map<CartesianCoordinates, Mow> lawnArea = new HashMap<>();
         return new Lawn(lawnArea, upperRightCornerPosition);
+    }
+
+    public Mow findAt(CartesianCoordinates cartesianCoordinates) throws OutOfLawnException {
+        if (!cartesianCoordinates.isIn(this.upperRightCornerPosition)) throw new OutOfLawnException();
+        return this.lawnArea.get(cartesianCoordinates);
     }
 
     public CartesianCoordinates findMow(Mow mow) {
@@ -45,6 +44,7 @@ public class Lawn {
             throw new OutOfLawnException();
         }
     }
+
     public void addMow(CartesianCoordinates initialPosition, Mow mow) throws OutOfLawnException, UsedCoordinateException {
         if (this.findAt(initialPosition) != null) throw new UsedCoordinateException();
         this.lawnArea.put(initialPosition, mow);

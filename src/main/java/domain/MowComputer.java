@@ -13,24 +13,24 @@ public class MowComputer {
 
     public static MowComputer initializeMowComputer(Lawn lawn, Mow mow) throws MowNotInLawnException {
         CartesianCoordinates cartesianCoordinates = lawn.findMow(mow);
-        if(cartesianCoordinates == null){
+        if (cartesianCoordinates == null) {
             throw new MowNotInLawnException();
         }
-        return new MowComputer(lawn,mow,cartesianCoordinates);
+        return new MowComputer(lawn, mow, cartesianCoordinates);
 
     }
 
-    public CartesianCoordinates getPosition() {
-        return position;
+    public MowPosition getMowPosition() {
+        return new MowPosition(position, mow.getOrientation());
     }
 
     public CartesianCoordinates moveMow(Direction direction) {
-        if (direction == Direction.LEFT || direction == Direction.RIGHT ){
+        if (direction == Direction.LEFT || direction == Direction.RIGHT) {
             this.mow.turn(direction);
             return this.position;
         }
         try {
-            this.position = lawn.setMowPosition(mow,position, mow.getOrientation().associatedVector);
+            this.position = lawn.setMowPosition(mow, position, mow.getOrientation().associatedVector);
         } catch (OutOfLawnException | UsedCoordinateException ignored) {
         }
         return this.position;

@@ -1,4 +1,4 @@
 package domain;
 
-public class OutOfLawnException extends Exception  {
+public class OutOfLawnException extends Exception {
 }

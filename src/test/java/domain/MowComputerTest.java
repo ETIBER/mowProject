@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 class MowComputerTest {
@@ -36,7 +36,7 @@ class MowComputerTest {
 
             when(mockedLawn.findMow(mockedMaw)).thenReturn(cartesianCoordinates);
             MowComputer mowComputer = MowComputer.initializeMowComputer(mockedLawn, mockedMaw);
-            assertEquals(mowComputer.getPosition(), cartesianCoordinates);
+            assertEquals(mowComputer.getMowPosition().getPosition(), cartesianCoordinates);
         }
     }
 
@@ -56,6 +56,7 @@ class MowComputerTest {
             verify(mockedMaw).turn(Direction.RIGHT);
 
         }
+
         @Nested
         class whenDirectionIsForward {
 
@@ -68,6 +69,7 @@ class MowComputerTest {
                 mowComputer.moveMow(Direction.FORWARD);
                 verify(mockedLawn).setMowPosition(mockedMaw, initialPosition, expectedVector);
             }
+
             @Test
             void itShouldStayInTheSamePositionIfSetMowPositionThrowOutOfLawnException() throws NegativeCoordinateException, OutOfLawnException, UsedCoordinateException {
                 when(mockedMaw.getOrientation()).thenReturn(Orientation.NORTH);
@@ -78,6 +80,7 @@ class MowComputerTest {
                 CartesianCoordinates newCoordinates = mowComputer.moveMow(Direction.FORWARD);
                 assertEquals(initialPosition, newCoordinates);
             }
+
             @Test
             void itShouldStayInTheSamePositionIfSetMowPositionThrowUsedCoordinateException() throws NegativeCoordinateException, OutOfLawnException, UsedCoordinateException {
                 when(mockedMaw.getOrientation()).thenReturn(Orientation.NORTH);
@@ -88,6 +91,7 @@ class MowComputerTest {
                 CartesianCoordinates newCoordinates = mowComputer.moveMow(Direction.FORWARD);
                 assertEquals(initialPosition, newCoordinates);
             }
+
             @Test
             void itShouldSetThePositionIfSetMowPositionSucceed() throws NegativeCoordinateException, OutOfLawnException, UsedCoordinateException {
                 when(mockedMaw.getOrientation()).thenReturn(Orientation.NORTH);
@@ -97,7 +101,7 @@ class MowComputerTest {
                 MowComputer mowComputer = new MowComputer(mockedLawn, mockedMaw, initialPosition);
                 when(mockedLawn.setMowPosition(mockedMaw, initialPosition, expectedVector)).thenReturn(newPosition);
                 CartesianCoordinates newCoordinates = mowComputer.moveMow(Direction.FORWARD);
-                assertEquals(newPosition, mowComputer.getPosition());
+                assertEquals(newPosition, mowComputer.getMowPosition().getPosition());
                 assertEquals(newPosition, newCoordinates);
             }
         }

@@ -11,6 +11,11 @@ public class CartesianCoordinates {
         this.y = y;
     }
 
+    public static CartesianCoordinates create(Integer x, Integer y) throws NegativeCoordinateException {
+        if (x < 0 || y < 0) throw new NegativeCoordinateException();
+        return new CartesianCoordinates(x, y);
+    }
+
     public Integer getX() {
         return x;
     }
@@ -18,13 +23,9 @@ public class CartesianCoordinates {
     public Integer getY() {
         return y;
     }
-    public static CartesianCoordinates create(Integer x, Integer y) throws NegativeCoordinateException {
-        if (x < 0 || y < 0) throw new NegativeCoordinateException();
-        return new CartesianCoordinates(x, y);
-    }
 
     public CartesianCoordinates addVector(CartesianVector vector) throws NegativeCoordinateException {
-        return CartesianCoordinates.create(this.getX()+ vector.getX(),this.getY()+ vector.getY());
+        return CartesianCoordinates.create(this.getX() + vector.getX(), this.getY() + vector.getY());
     }
 
     @Override
