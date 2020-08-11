@@ -1,26 +1,18 @@
-# Java JUnit5
+# Mow project
 
-Minimal setup with Java [JUnit5](https://junit.org/junit5/) to get you started.
+Bootsrap with : 
 
-You can use [gradle](https://gradle.org/) or [maven](https://maven.apache.org/)
+    https://github.com/swkBerlin/kata-bootstraps
 
-[More complicated JUnit5 setups](https://github.com/junit-team/junit5-samples)
 
 ## Setup
 
-    git clone https://github.com/swkBerlin/kata-bootstraps
-    cd java/junit5
-
-Open as preexisting project in your favorite IDE and choose between gradle or maven nature
+Clone the project and use gradle to build it
 
 ## Running Tests
 
 To execute the tests either run `./gradlew test`, `mvn test` or run the tests from the IDE you are using
 
-## Test Libraries Available from the Get-Go
-- JUnit 5.5.2
+### Some integration test may failed
 
-This repo was tested with eclipse and idea, if you encounter problems please open a issue or send a pull request.
-
-Have fun!
-# mowProject
+As the simulation is multithreaded, the speed of the mow is not the same at each
